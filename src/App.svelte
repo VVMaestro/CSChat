@@ -2,6 +2,8 @@
 	import Global from './components/global.svelte';
 	import MainButton from './components/main-button.svelte';
 	import PhonePanel from './components/phone-panel.svelte';
+	import EmailPanel from './components/email-panel.svelte';
+	import ChatPanel from './components/chat-panel.svelte';
 
 	let visible = false;
 	let buttonsOutTimeout;
@@ -23,6 +25,9 @@
 	}
 
 	function handleClick (e) {
+		for (let elem in isShow) {
+			isShow[elem] = false;
+		}
 		isShow[e.detail.action] = true;
 	}
 
@@ -48,10 +53,13 @@
 </style>
 
 {#if isShow.phone}
-	<PhonePanel on:click={() => { isShow.phone = false; } } />
+	<PhonePanel on:click={ () => { isShow.phone = false; } } />
 {/if}
 {#if isShow.email}
-	
+	<EmailPanel on:click={ () => { isShow.email = false; } } />
+{/if}
+{#if isShow.chat}
+	<ChatPanel on:click={ () => { isShow.chat = false; } } />
 {/if}
 <div class="button-pannel">
 	<MainButton 
